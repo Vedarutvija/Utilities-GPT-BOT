@@ -7,6 +7,7 @@ import json
 from mistralai.client import MistralClient
 from mistralai.models.chat_completion import ChatMessage
 from flask_session import Session
+import os
 
 app = Flask(__name__)
 app.secret_key = "3db1083617e63bb0f7d9fbda2020cd8e"
