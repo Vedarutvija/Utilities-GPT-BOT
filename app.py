@@ -7,14 +7,10 @@ import json
 from mistralai.client import MistralClient
 from mistralai.models.chat_completion import ChatMessage
 from flask_session import Session
-<<<<<<< HEAD
 from dotenv import load_dotenv
 import os
 
 load_dotenv()
-=======
-import os
->>>>>>> 329b0849af0a5e62cca4e390e6c525c4be2f3c2f
 
 app = Flask(__name__)
 app.secret_key = ("SECRET_KEY")
@@ -22,11 +18,7 @@ app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
 
 # Initialize the Mistral client
-<<<<<<< HEAD
 api_key = os.getenv("API_KEY")
-=======
-api_key = os.getenv("MISTRAL_API_KEY")
->>>>>>> 329b0849af0a5e62cca4e390e6c525c4be2f3c2f
 model = "mistral-large-latest"
 client = MistralClient(api_key=api_key)
 
