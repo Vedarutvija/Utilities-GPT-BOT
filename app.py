@@ -14,7 +14,7 @@ app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
 
 # Initialize the Mistral client
-api_key = "LE1auEUXxe1PPTD1LInR5OW05xfj8WdH"
+api_key = os.getenv("MISTRAL_API_KEY")
 model = "mistral-large-latest"
 client = MistralClient(api_key=api_key)
 
