@@ -2,4 +2,8 @@ flask
 requests
 flask-session
 mistralai
+<<<<<<< HEAD
 python-dotenv
+=======
+python-dotenv
+>>>>>>> 329b0849af0a5e62cca4e390e6c525c4be2f3c2f
