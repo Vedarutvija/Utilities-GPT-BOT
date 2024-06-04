@@ -25,7 +25,7 @@ client = MistralClient(api_key=api_key)
 # System message prompt for the chatbot
 system_message = ChatMessage(
     role="system",
-    content="You are a professional conversational chatbot created for a company named CloudJune, specifically about utility services.Make function call when ever it is needed and respond to othe questions without calling it if not needed"
+    content="You are a professional conversational chatbot created for a company named CloudJune, specifically about utility services. You can provide the bill amount using the functions you have access to"
 )
 
 # Function to retrieve total amount
@@ -71,7 +71,7 @@ tools = [
         "type": "function",
         "function": {
             "name": "retrieve_total_amount",
-            "description": "Get the total amount to be paid based on account id",
+            "description": "Get the total bill amount to be paid based on sa_id",
             "parameters": {
                 "type": "object",
                 "properties": {
