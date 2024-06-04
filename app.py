@@ -25,11 +25,11 @@ client = MistralClient(api_key=api_key)
 # System message prompt for the chatbot
 system_message = ChatMessage(
     role="system",
-    content="You are a professional conversational chatbot created for a company named CloudJune, specifically about utility services. You can provide the bill amount using the functions you have access to"
+    content="You are a professional conversational chatbot created for a company named CloudJune, specifically about utility services. You can provide the bill amount in AED using the bill function you have access to"
 )
 
 # Function to retrieve total amount
-def retrieve_total_amount(sa_id: str) -> str:
+def retrieve_total_bill_amount(sa_id: str) -> str:
     username = 'INTUSER'
     password = 'INTUSER00'
     url = 'https://193.123.64.145:4443/ouaf/webservices/CM-SABAL?WSDL'
@@ -70,14 +70,14 @@ tools = [
     {
         "type": "function",
         "function": {
-            "name": "retrieve_total_amount",
-            "description": "Get the total bill amount to be paid based on sa_id",
+            "name": "retrieve_total_bill_amount",
+            "description": "Get the total bill amount in AED to be paid based on user's sa_id",
             "parameters": {
                 "type": "object",
                 "properties": {
                     "sa_id": {
                         "type": "string",
-                        "description": "The service agreement ID.",
+                        "description": "The service agreement ID (sa_id).",
                     }
                 },
                 "required": ["sa_id"],
@@ -87,7 +87,7 @@ tools = [
 ]
 
 names_to_functions = {
-    'retrieve_total_amount': retrieve_total_amount
+    'retrieve_total_bill_amount': retrieve_total_bill_amount
 }
 
 @app.route('/')
@@ -128,7 +128,7 @@ def predict():
         function_params = json.loads(tool_call.function.arguments)
         
         if 'sa_id' not in function_params or not function_params['sa_id']:
-            answer = "To provide you with the total amount to be paid, I need your service agreement ID."
+            answer = "To provide you with the total bill amount to be paid, I need your service agreement ID."
             return jsonify({"answer": answer})
         
         # Call the function to retrieve the total amount
