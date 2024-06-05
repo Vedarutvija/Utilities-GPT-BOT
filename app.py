@@ -29,7 +29,7 @@ system_message = ChatMessage(
 )
 
 # Function to retrieve total amount
-def retrieve_total_bill_amount(sa_id: str) -> str:
+def retrieve_total_amount(sa_id: str) -> str:
     username = 'INTUSER'
     password = 'INTUSER00'
     url = 'https://193.123.64.145:4443/ouaf/webservices/CM-SABAL?WSDL'
@@ -61,8 +61,12 @@ def retrieve_total_bill_amount(sa_id: str) -> str:
     if response.status_code == 200:
         root = ET.fromstring(response.content)
         namespace = {'ouaf': 'http://ouaf.oracle.com/webservices/cm/CM-SABAL'}
-        total_amount = root.find('.//ouaf:totalAmount', namespace).text
-        return json.dumps({"total_amount": total_amount})
+        total_amount_element = root.find('.//ouaf:totalAmount', namespace)
+        if total_amount_element is not None:
+            total_amount = total_amount_element.text
+            return json.dumps({"total_amount": total_amount})
+        else:
+            return json.dumps({"error": "Failed to retrieve data. No caoount found."})
     else:
         return json.dumps({"error": f"Failed to retrieve data. Status code: {response.status_code}"})
 
