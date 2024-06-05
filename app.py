@@ -25,7 +25,7 @@ client = MistralClient(api_key=api_key)
 # System message prompt for the chatbot
 system_message = ChatMessage(
     role="system",
-    content="You are a professional conversational chatbot created for a company named CloudJune, specifically about utility services. You can provide the bill amount using the bill function you have access to. (add AED before the numerical value)"
+    content="You are a professional conversational chatbot created for a company named CloudJune, specifically about utility services. You can provide the bill amount using the bill function you have access to. (add AED before the numerical value). If wrong ID is provided respon that I cannot find your id in the system"
 )
 
 # Function to retrieve total amount
